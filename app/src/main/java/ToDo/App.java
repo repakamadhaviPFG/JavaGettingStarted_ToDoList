@@ -3,12 +3,132 @@
  */
 package ToDo;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class App {
     public String getGreeting() {
+
         return "ToDo List Manager";
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public void displayFirstMenu() {
+        System.out.println("\n\t\tMain Menu");
+        System.out.println("\n1. Open To Do List");//open up from file
+        System.out.println("2. Display To Do Items");
+        System.out.println("3. Edit To Do Item");
+        System.out.println("4. Delete To Do Item");
+        System.out.println("5. Save To Do List");
+        System.out.println("6. Exit");
+
+        return;
     }
+
+    private String callScanner(String prompt) {
+
+        System.out.println(prompt);
+        //Scanner scanner = new Scanner(System.in);
+        String response = scanner.nextLine();
+        //scanner.close();
+        return response;
+    }
+
+    private void displayTaskList(ArrayList<String> listOfTasks) {
+        System.out.println("\n\tList of Tasks");
+        for (String i : listOfTasks) {
+            System.out.println(i);
+        }
+        String prompt = "\n Would you like to return to Main Menu (Y/N):";
+        String responseReturned = callScanner(prompt);
+        if(responseReturned.equals("Y"))
+            return;
+        responseReturned = callScanner("Would you like to Exit (Y/N):");
+        if(responseReturned.equals("Y"))
+            System.exit(0);
+
+        //new prompt?
+    }
+
+    Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        App app = new App();
+
+        //app.buildList();
+        String task1 = "Iron pants";
+        String task2 = "Rake leaves";
+        String task3 = "Till garden";
+        ArrayList<String> listOfTasks = new ArrayList<String>();
+        listOfTasks.add(task1);
+        listOfTasks.add(task2);
+        listOfTasks.add(task3);
+
+        Task task1x = new Task("Iron pants");
+        Task task2x = new Task("Rake Leaves");
+        Task task3x = new Task("Till garden");
+        ArrayList<Task> listOfTasksX = new ArrayList<>();
+        listOfTasksX.add(task1x);
+        listOfTasksX.add(task2x);
+        listOfTasksX.add(task3x);
+
+        System.out.println(listOfTasksX.size());
+        //System.out.println(listOfTasksX.getName(0));
+
+
+        String responseReturned;
+        do {
+            app.displayFirstMenu();//should the main menu always  happen?
+
+
+            String prompt = "\nPlease input your option:";
+            responseReturned = app.callScanner(prompt);
+
+            System.out.println("\nYour response was " + responseReturned);
+            switch (responseReturned) {
+                case "1": //what does this option even mean?
+                    System.out.println("You chose to open the to do list");
+                    break;
+                case "2":
+                    app.displayTaskList(listOfTasks);
+                    break;
+                case "3":
+                    System.out.println("You chose to edit the to do list");
+                    break;
+                case "4":
+                    System.out.println("You chose to delete from the to do list");
+                    break;
+                case "5":
+                    System.out.println("You chose to save the to do list");
+                    break;
+                case "6":
+                    System.out.println("You chose to exit");
+                    break;
+                default:
+                    System.out.println("You chose an invalid option - Please enter a number between 1 and 6");
+                    break;
+            }
+        } while (!responseReturned.equals("6"));
+        app.scanner.close();
+
+    }
+
+
+
+    // public ArrayList buildList() {
+        /*
+        Task task1 = new Task("Iron pants");
+        Task task2 = new Task("Rake Leaves");
+        Task task3 = new Task("Till garden");
+        ArrayList<Task> listOfTasks = new ArrayList<>();
+        listOfTasks.add(task1);
+        listOfTasks.add(task2);
+        listOfTasks.add(task3);
+        */
+
+
+    //return listOfTasks;
+
+    // }
+
+
+
 }
